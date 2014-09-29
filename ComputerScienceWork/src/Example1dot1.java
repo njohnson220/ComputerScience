@@ -1,3 +1,5 @@
+//Nathan Johnson
+// 9/28/14
 
 public class Example1dot1 {
 	public static void main(String...args){
