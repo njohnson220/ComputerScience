@@ -1,6 +1,6 @@
 //Nathan Johnson
 // 9/28/14
-//test change 9/29/14
+//REVISION 10/1 FOR 5.4 ASSIGNMENT
 
 public class Example1dot1 {
 	public static void main(String...args){
