@@ -50,7 +50,6 @@ public class Magpie3
 		{
 			response = "Tell me more about your pets.";
 		}
-		else if
 		else
 		{
 			response = getRandomResponse();
