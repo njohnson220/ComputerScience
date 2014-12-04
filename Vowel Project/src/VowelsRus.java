@@ -19,7 +19,9 @@ public class VowelsRus {
 	public static void main(String...args) throws IOException {
 		
 		initFile();
+		readLine();
 		getData();
+		pluralFormer();
 		
 	}
 	
@@ -30,9 +32,13 @@ public class VowelsRus {
 	    reader = new BufferedReader(inReader);
 	  }
 	
+	public static void readLine() throws IOException
+	{
+		line = reader.readLine();
+	}
+	
 	public static void getData() throws IOException
 	  {
-	    line = reader.readLine();   //acquiring the data line as a string
 	    System.out.println ("data line = " + line ); // view data line as one string
 	    System.out.println();
 	    
@@ -45,7 +51,46 @@ public class VowelsRus {
 	    System.out.println(word + " " + suffix);
 	    
 	    line = reader.readLine();
+	    //System.out.println(line);
 	    
 	  }  
+	
+	public static void pluralFormer() {
+		String pluralWord = "";
+		String finalLetter = word.substring(word.length() - 1, word.length());
+		//System.out.println(finalLetter);
+		
+		if (finalLetter.equals("A") || finalLetter.equals("C") ||
+		    finalLetter.equals("S") || finalLetter.equals("L"))
+		{
+			if (word.substring(word.length() - 2, word.length() - 1).equals("A") ||
+				word.substring(word.length() - 2, word.length() - 1).equals("C") ||
+				word.substring(word.length() - 2, word.length() - 1).equals("S") ||
+				word.substring(word.length() - 2, word.length() - 1).equals("L"))
+			{
+				pluralWord = word + finalLetter + "H";
+			}
+			else
+			{
+				pluralWord = word.substring(0, word.length() - 1) + "G"; 
+			}
+			//System.out.println("Vowel");
+			
+		}
+		
+		System.out.println(pluralWord);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
