@@ -1,5 +1,4 @@
 import java.util.*;
-//hi
 import java.io.*;
 
 public class VowelsRus {
@@ -8,22 +7,35 @@ public class VowelsRus {
 	private static FileInputStream inFile;
 	private static InputStreamReader inReader;
 	private static  BufferedReader reader;
+	private static String pluralWord = "";
+
+
 
 	//  StringTokenizer variable used to separate line into different data elements
-	private static StringTokenizer strTkn;
 
 	//program variables to hold data
-	private static String line,word,suffix;
-	private static int num1, num2,num3,grade, total;
-	private static double avg;
+	private static String word,suffix;
 
+
+	
 	public static void main(String...args) throws IOException {
-		
 		initFile();
-		readLine();
+		String line;
+		int count = 0;
+		while ((line = reader.readLine()) != null) {
+			count++;
+		}
+		
+		reader.close();
+		initFile();
+		
+		for (int i = 0; i < count; i++) {
+		
 		getData();
 		pluralFormer();
 		
+		
+		}
 	}
 	
 	public static void initFile() throws IOException
@@ -33,41 +45,42 @@ public class VowelsRus {
 	    reader = new BufferedReader(inReader);
 	  }
 	
-	public static void readLine() throws IOException
-	{
-		line = reader.readLine();
-	}
 	
 	public static void getData() throws IOException
 	  {
-	    System.out.println ("data line = " + line ); // view data line as one string
-	    System.out.println();
+		Scanner docReader = new Scanner(reader.readLine());
+
+		
+	    //System.out.println ("data line = " + line ); // view data line as one string
+	    //System.out.println();
 	    
-	    strTkn = new StringTokenizer(line);  // attaching the string tokenizer to the line
-	    
+
+		//StringTokenizer strTkn = new StringTokenizer(line);
+
 	    // placing the first word and suffix in the dataline into a string variable    
-	    word = strTkn.nextToken();
-	    suffix = strTkn.nextToken();
+	    word = docReader.next();
+	    suffix = docReader.next();
 	    
-	    System.out.println(word + " " + suffix);
+	    System.out.println("Line read is " + word + " " + suffix);
 	    
-	    line = reader.readLine();
+	    //line = reader.readLine();
 	    //System.out.println(line);
 	    
 	  }  
 	
-	public static void pluralFormer() {
-		String pluralWord = "";
+	public static void pluralFormer() throws IOException {
 		String finalLetter = word.substring(word.length() - 1, word.length());
 		//System.out.println(finalLetter);
+		
+		String secondToLast = word.substring(word.length() - 2, word.length() - 1);
 		
 		if (finalLetter.equals("A") || finalLetter.equals("C") ||
 		    finalLetter.equals("S") || finalLetter.equals("L"))
 		{
-			if (word.substring(word.length() - 2, word.length() - 1).equals("A") ||
-				word.substring(word.length() - 2, word.length() - 1).equals("C") ||
-				word.substring(word.length() - 2, word.length() - 1).equals("S") ||
-				word.substring(word.length() - 2, word.length() - 1).equals("L"))
+			if (secondToLast.equals("A") ||
+				secondToLast.equals("C") ||
+				secondToLast.equals("S") ||
+				secondToLast.equals("L"))
 			{
 				pluralWord = word + finalLetter + "H";
 			}
@@ -78,8 +91,25 @@ public class VowelsRus {
 			//System.out.println("Vowel");
 			
 		}
+		else
+		{
+			if (secondToLast.equals("A") == true ||
+				  secondToLast.equals("C") == true ||
+				  secondToLast.equals("S") == true ||
+				  secondToLast.equals("L") == true)
+			{
+				pluralWord = word + "GH";
+			}
+			else
+			{
+				pluralWord = word + finalLetter + "H";
+			}
+		}
 		
-		System.out.println(pluralWord);
+		System.out.println("Plural word is " + pluralWord);
+		System.out.println();
+		//line = reader.readLine();
+
 	}
 	
 	
