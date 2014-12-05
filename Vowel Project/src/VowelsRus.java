@@ -16,12 +16,12 @@ public class VowelsRus {
 	// variables necessary for file input
 	private static FileInputStream inFile;
 	private static InputStreamReader inReader;
-	private static  BufferedReader reader, prelimReader;
-	private static String pluralWord = "";
+	private static  BufferedReader reader;
 
 	//program variables to hold data
-	private static String word,suffix;
-	private static int lineCount;
+	private static String word,suffix; //variables to store the original word and the suffix
+	private static int lineCount; //variable to count how many lines are in the document
+	private static String pluralWord = ""; //this is the plural form of the input word
 
 
 	
@@ -29,7 +29,7 @@ public class VowelsRus {
 		initFile();
 		countLines();
 		
-		for (int i = 0; i < lineCount; i++) {
+		for (int i = 0; i < lineCount; i++) { //this loop executes as many times as there are lines in the document
 		
 		getData();
 		pluralFormer();
@@ -53,48 +53,35 @@ public class VowelsRus {
 			lineCount++;
 		}
 		
-		reader.close();
-		initFile();
+		reader.close(); //closed to reset the reader's position in the document
+		initFile(); //reinitialize the reader at the top of the doucument
 	}
 	
 	
 	public static void getData() throws IOException
 	  {
-		Scanner docReader = new Scanner(reader.readLine());
-
-		
-	    //System.out.println ("data line = " + line ); // view data line as one string
-	    //System.out.println();
+		Scanner docReader = new Scanner(reader.readLine()); //I use a scanner for reading the tokens
 	    
-
-		//StringTokenizer strTkn = new StringTokenizer(line);
-
-	    // placing the first word and suffix in the dataline into a string variable    
+	    // placing the first word and suffix in the dataline into string variables    
 	    word = docReader.next();
 	    suffix = docReader.next();
 	    
 	    System.out.println("Line read is " + word + " " + suffix);
-	    
-	    //line = reader.readLine();
-	    //System.out.println(line);
-	    
 	  }  
 	
-	public static void pluralFormer() throws IOException {
-		String finalLetter = word.substring(word.length() - 1, word.length());
-		//System.out.println(finalLetter);
-		
+	public static void pluralFormer() throws IOException { //this method makes the plurals
+		String finalLetter = word.substring(word.length() - 1, word.length());		
 		String secondToLast = word.substring(word.length() - 2, word.length() - 1);
 		
-		if (finalLetter.equals("A") || finalLetter.equals("C") ||
+		if (finalLetter.equals("A") || finalLetter.equals("C") || //if the final letter of the word is a vowel
 		    finalLetter.equals("S") || finalLetter.equals("L"))
 		{
-			if (secondToLast.equals("A") ||
+			if (secondToLast.equals("A") || //if the second to last letter of the word is a vowel
 				secondToLast.equals("C") ||
 				secondToLast.equals("S") ||
 				secondToLast.equals("L"))
 			{
-				pluralWord = word + finalLetter + "H";
+				pluralWord = word + finalLetter + "H"; //the plural is the word plus the last vowel plus H
 			}
 			else
 			{
