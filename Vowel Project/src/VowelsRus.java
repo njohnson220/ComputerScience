@@ -1,3 +1,13 @@
+/*Nathan Johnson
+ * 12/4/14
+ * Vowels-R-Us project
+ * This project takes words from planet ACSL and attaches suffixes and pluralizes them using appropriate extra-terrestrial
+ * grammar rules.
+ * 
+ * UPDATE 12/4/14
+ * The pluralizer is functional, though could be revised.
+ */
+
 import java.util.*;
 import java.io.*;
 
@@ -6,30 +16,20 @@ public class VowelsRus {
 	// variables necessary for file input
 	private static FileInputStream inFile;
 	private static InputStreamReader inReader;
-	private static  BufferedReader reader;
+	private static  BufferedReader reader, prelimReader;
 	private static String pluralWord = "";
-
-
-
-	//  StringTokenizer variable used to separate line into different data elements
 
 	//program variables to hold data
 	private static String word,suffix;
+	private static int lineCount;
 
 
 	
 	public static void main(String...args) throws IOException {
 		initFile();
-		String line;
-		int count = 0;
-		while ((line = reader.readLine()) != null) {
-			count++;
-		}
+		countLines();
 		
-		reader.close();
-		initFile();
-		
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < lineCount; i++) {
 		
 		getData();
 		pluralFormer();
@@ -44,6 +44,18 @@ public class VowelsRus {
 	    inReader = new InputStreamReader(inFile);
 	    reader = new BufferedReader(inReader);
 	  }
+	
+	private static void countLines() throws IOException
+	{
+		String checkLine;
+		lineCount = 0;
+		while ((checkLine = reader.readLine()) != null) {
+			lineCount++;
+		}
+		
+		reader.close();
+		initFile();
+	}
 	
 	
 	public static void getData() throws IOException
@@ -94,9 +106,9 @@ public class VowelsRus {
 		else
 		{
 			if (secondToLast.equals("A") == true ||
-				  secondToLast.equals("C") == true ||
-				  secondToLast.equals("S") == true ||
-				  secondToLast.equals("L") == true)
+				 secondToLast.equals("C") == true ||
+				 secondToLast.equals("S") == true ||
+			     secondToLast.equals("L") == true)
 			{
 				pluralWord = word + "GH";
 			}
