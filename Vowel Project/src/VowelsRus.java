@@ -90,24 +90,23 @@ public class VowelsRus {
 			//System.out.println("Vowel");
 			
 		}
-		else
+		else //executes if the final letter of the word is a consonant
 		{
-			if (secondToLast.equals("A") == true ||
+			if (secondToLast.equals("A") == true || //if the second to last is a vowel, plural is the word plus GH
 				 secondToLast.equals("C") == true ||
 				 secondToLast.equals("S") == true ||
 			     secondToLast.equals("L") == true)
 			{
 				pluralWord = word + "GH";
 			}
-			else
+			else //if the second to last letter is a consonant, double the final consonant and add H
 			{
 				pluralWord = word + finalLetter + "H";
 			}
 		}
 		
-		System.out.println("Plural word is " + pluralWord);
+		System.out.println("Plural word is " + pluralWord); //print the plural form of the word
 		System.out.println();
-		//line = reader.readLine();
 
 	}
 	
