@@ -20,7 +20,7 @@ public class VowelsRus {
 
 	//program variables to hold data
 	private static String word,suffix; //variables to store the original word and the suffix
-	private static int lineCount, suffixIdentity, count; //variable to count how many lines are in the document
+	private static int lineCount, suffixIdentity, vowelCount; //variable to count how many lines are in the document
 	private static String pluralWord, suffixWord, currentLetter = ""; //this is the plural form of the input word
 
 
@@ -144,24 +144,62 @@ public class VowelsRus {
 			}
 			else
 			{
-				
+				//System.out.println(word.substring(word.length() - vowelCount, word.length()));
+				//System.out.println(word.substring(0, word.length() - vowelCount - 1));
+				suffixWord = (word.substring(0, word.length() - vowelCount - 1) + (word.substring(word.length() - vowelCount, word.length())) + suffix);
 			}
 		}
 		
-		System.out.println(suffixWord);
+		System.out.println("Suffix word is " + suffixWord);
+		System.out.println();
 	}
 	
 	private static void findPattern() {
-		String newWord = word + " ";
-		int count = 2;
-		while (word.substring(word.length() - count, word.length() - count + 1).equals("A") ||
-		       word.substring(word.length() - count, word.length() - count + 1).equals("C") ||
-		       word.substring(word.length() - count, word.length() - count + 1).equals("S") ||
-		       word.substring(word.length() - count, word.length() - count + 1).equals("L")) 
+		int count = 1;
+		boolean vowelIdentity = word.substring(word.length() - 1, word.length()).equals("A") ||
+		                        word.substring(word.length() - 1, word.length()).equals("C") ||
+		                        word.substring(word.length() - 1, word.length()).equals("S") ||
+		                        word.substring(word.length() - 1, word.length()).equals("L");
+		
+		boolean letterCheck = (word.substring(word.length() - count, word.length() - count + 1).equals("A") ||
+							   word.substring(word.length() - count, word.length() - count + 1).equals("C") ||
+							   word.substring(word.length() - count, word.length() - count + 1).equals("S") ||
+							   word.substring(word.length() - count, word.length() - count + 1).equals("L"));
+		
+		boolean consonantCheck = !(word.substring(word.length() - count, word.length() - count + 1).equals("A") ||
+				   				   word.substring(word.length() - count, word.length() - count + 1).equals("C") ||
+				   				   word.substring(word.length() - count, word.length() - count + 1).equals("S") ||
+				   				   word.substring(word.length() - count, word.length() - count + 1).equals("L"));
+				
+		if (vowelIdentity == true)
 		{
-			count++;
-			System.out.println(count);
+			while (letterCheck == true && count <= word.length())
+			{
+				count++;
+				//System.out.println(count);
+				letterCheck = (word.substring(word.length() - count, word.length() - count + 1).equals("A") ||
+						       word.substring(word.length() - count, word.length() - count + 1).equals("C") ||
+						       word.substring(word.length() - count, word.length() - count + 1).equals("S") ||
+						       word.substring(word.length() - count, word.length() - count + 1).equals("L"));
+			}
 		}
+		else
+		{
+			while (consonantCheck == true && count <= word.length())
+			{
+				count++;
+				//System.out.println(count);
+				consonantCheck = !(word.substring(word.length() - count, word.length() - count + 1).equals("A") ||
+		   				           word.substring(word.length() - count, word.length() - count + 1).equals("C") ||
+		   				           word.substring(word.length() - count, word.length() - count + 1).equals("S") ||
+		   				           word.substring(word.length() - count, word.length() - count + 1).equals("L"));
+			}
+		}
+		
+		vowelCount = count - 2;
+		//System.out.println(vowelCount);
+		//System.out.println(word.substring(word.length() - vowelCount, word.length()));
+		
 	}
 	
 	
