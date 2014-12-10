@@ -26,15 +26,15 @@ public class VowelsRus {
 
 	
 	public static void main(String...args) throws IOException {
-		initFile();
-		countLines();
+		initFile(); //initialize the file
+		countLines(); //count how many lines of data are in the document
 		
 		for (int i = 0; i < lineCount; i++) { //this loop executes as many times as there are lines in the document
 		
-		getData();
-		pluralFormer();
-		findPattern();
-		addSuffix();
+		getData(); //get data
+		pluralFormer(); //form the plural of the input word
+		findPattern(); //find the leftmost vowel/consonant pattern letter in the input word
+		addSuffix(); //add the suffix to the input word
 		
 		
 		}
@@ -51,7 +51,7 @@ public class VowelsRus {
 	{
 		String checkLine;
 		lineCount = 0;
-		while ((checkLine = reader.readLine()) != null) {
+		while ((checkLine = reader.readLine()) != null) { //if the reader doesn't encounter a nonexistent line, continue to count lines
 			lineCount++;
 		}
 		
@@ -83,12 +83,12 @@ public class VowelsRus {
 				secondToLast.equals("L"))
 			{
 				pluralWord = word + finalLetter + "H"; //the plural is the word plus the last vowel plus H
-				suffixIdentity = 1;
+				suffixIdentity = 1; //ends in two vowels
 			}
 			else
 			{
 				pluralWord = word.substring(0, word.length() - 1) + "G";
-				suffixIdentity = 2;
+				suffixIdentity = 2; //ends in a single vowel
 			}
 			//System.out.println("Vowel");
 			
@@ -100,13 +100,13 @@ public class VowelsRus {
 				secondToLast.equals("S") == true ||
 			    secondToLast.equals("L") == true)
 			{
-				pluralWord = word + "GH";
-				suffixIdentity = 3;
+				pluralWord = word + "GH"; 
+				suffixIdentity = 3; //word ends in a single consonant
 			}
 			else //if the second to last letter is a consonant, double the final consonant and add H
 			{
-				pluralWord = word + finalLetter + "H";
-				suffixIdentity = 1;
+				pluralWord = word + finalLetter + "H"; 
+				suffixIdentity = 1; //word ends in two consonants
 			}
 		}
 		
@@ -116,37 +116,51 @@ public class VowelsRus {
 	
 	public static void addSuffix() {
 		
-		boolean firstLetter = suffix.substring(0, 1).equals("A") || suffix.substring(0, 1).equals("C")
+		/* I created different identities for different types of words based on their endings, called suffixIdentity
+		 * Since pluralFormer already analyzes the word, it would be repetitive and inefficient to do it again within this
+		 * method. 
+		 * 
+		 * suffixIdentity = 1...This means the word ends in two consonants/vowels
+		 * suffixIdentity = 2...This means the word ends in a single vowel
+		 * suffixIdentity = 3...This means the word ends in a single consonant
+		 */
+		
+		//returns true if the first letter of the suffix is a vowel
+		boolean firstSuffixLetter = suffix.substring(0, 1).equals("A") || suffix.substring(0, 1).equals("C") 
 						   || suffix.substring(0, 1).equals("S") || suffix.substring(0, 1).equals("L");
 		
-		if (suffixIdentity == 3) {
-			suffixWord = word + suffix;
+		if (suffixIdentity == 3) { //if the word ends in a single consonant
+			suffixWord = word + suffix; //add the suffix and nothing else
 		}
-		else if (suffixIdentity == 2)
+		else if (suffixIdentity == 2) //if the word ends in a single vowel
 		{
-			if (firstLetter == true)
+			if (firstSuffixLetter == true) //if the first letter of the suffix is a vowel
 			{
-				suffix = suffix.substring(1, suffix.length());
-				suffixWord = word + suffix;
+				suffix = suffix.substring(1, suffix.length()); //the suffix now is the original suffix without the first letter
+				suffixWord = word + suffix; //add the suffix to the word
+			}
+			else //if the first letter of the suffix is a consonant
+			{
+				suffix = suffix.substring(0, 1) + suffix; //add the first letter of the suffix to the suffix
+				suffixWord = word + suffix; //add the suffix to the word
+			}
+		}
+		else if (suffixIdentity == 1) //if the word ends in two consonants/vowels
+		{
+			if (firstSuffixLetter == true) //if the first suffix letter is a vowel
+			{
+				suffix = suffix.substring(0, 1) + suffix; //add the first letter of the suffix to the suffix
+				suffixWord = word + suffix; //add the suffix to the word
 			}
 			else
 			{
-				suffix = suffix.substring(0, 1) + suffix;
-				suffixWord = word + suffix;
-			}
-		}
-		else if (suffixIdentity == 1)
-		{
-			if (firstLetter == true)
-			{
-				suffix = suffix.substring(0, 1) + suffix;
-				suffixWord = word + suffix;
-			}
-			else
-			{
-				//System.out.println(word.substring(word.length() - vowelCount, word.length()));
-				//System.out.println(word.substring(0, word.length() - vowelCount - 1));
-				suffixWord = (word.substring(0, word.length() - vowelCount - 1) + (word.substring(word.length() - vowelCount, word.length())) + suffix);
+				//the suffix word before the leftmost letter in the vowel/consonant pattern
+				String beginOfSuffixWord = word.substring(0, word.length() - vowelCount - 1); 
+				//the suffix word after the leftmost letter in the vowel/consonant pattern
+				String endOfSuffixWord = word.substring(word.length() - vowelCount, word.length());
+				
+				//add the two together without the leftmost letter in the pattern, then add the suffix
+				suffixWord = beginOfSuffixWord + endOfSuffixWord + suffix; 
 			}
 		}
 		
