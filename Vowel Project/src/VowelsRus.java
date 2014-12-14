@@ -6,6 +6,12 @@
  * 
  * UPDATE 12/4/14
  * The pluralizer is functional, though could be revised.
+ * 
+ * UPDATE 12/8/14
+ * The suffix adder is functional, though could be revised.
+ * 
+ * UPDATE 12/14/14
+ * Everything is cleaned up, comments have been added for better code readability
  */
 
 import java.util.*;
@@ -28,26 +34,30 @@ public class VowelsRus {
 	public static void main(String...args) throws IOException {
 		initFile(); //initialize the file
 		countLines(); //count how many lines of data are in the document
+		executeEverything(); //analyzes and prints data for as many lines as there are in the document
 		
-		for (int i = 0; i < lineCount; i++) { //this loop executes as many times as there are lines in the document
-		
-		getData(); //get data
-		pluralFormer(); //form the plural of the input word
-		findPattern(); //find the leftmost vowel/consonant pattern letter in the input word
-		addSuffix(); //add the suffix to the input word
-		
-		
-		}
 	}
 	
-	public static void initFile() throws IOException
+	public static void executeEverything() throws IOException //executes all methods for data analyzation in the program
+	{
+		
+		for (int i = 0; i < lineCount; i++) { //this loop executes as many times as there are lines in the document
+			
+			getData(); //get data
+			pluralFormer(); //form the plural of the input word
+			findPattern(); //find the leftmost vowel/consonant pattern letter in the input word
+			addSuffix(); //add the suffix to the input word
+			}
+	}
+	
+	public static void initFile() throws IOException //initialize the file for reading
 	  {
 	    inFile = new FileInputStream ("C:\\!!VHSAPCS\\vowels.txt"); // notice the double slash marks
 	    inReader = new InputStreamReader(inFile);
 	    reader = new BufferedReader(inReader);
 	  }
 	
-	private static void countLines() throws IOException
+	private static void countLines() throws IOException //count how many data lines are in the document
 	{
 		String checkLine;
 		lineCount = 0;
@@ -59,7 +69,7 @@ public class VowelsRus {
 		initFile(); //reinitialize the reader at the top of the doucument
 	}
 	
-	public static void getData() throws IOException
+	public static void getData() throws IOException //tokenize the data lines in the file
 	  {
 		Scanner docReader = new Scanner(reader.readLine()); //I use a scanner for reading the tokens
 	    
@@ -67,7 +77,7 @@ public class VowelsRus {
 	    word = docReader.next();
 	    suffix = docReader.next();
 	    
-	    System.out.println("Line read is " + word + " " + suffix);
+	    System.out.println("Line read is " + word + " " + suffix); //print the unmodified, tokenized data line
 	  }
 	
 	public static void pluralFormer() throws IOException { //this method makes the plurals
@@ -114,7 +124,7 @@ public class VowelsRus {
 
 	}
 	
-	public static void addSuffix() {
+	public static void addSuffix() { //adds suffixes to the words
 		
 		/* I created different identities for different types of words based on their endings, called suffixIdentity
 		 * Since pluralFormer already analyzes the word, it would be repetitive and inefficient to do it again within this
@@ -127,35 +137,58 @@ public class VowelsRus {
 		
 		//returns true if the first letter of the suffix is a vowel
 		boolean firstSuffixLetter = suffix.substring(0, 1).equals("A") || suffix.substring(0, 1).equals("C") 
-						   || suffix.substring(0, 1).equals("S") || suffix.substring(0, 1).equals("L");
+						         || suffix.substring(0, 1).equals("S") || suffix.substring(0, 1).equals("L");
 		
-		if (suffixIdentity == 3) { //if the word ends in a single consonant
-			suffixWord = word + suffix; //add the suffix and nothing else
+		//if the word ends in a single consonant
+		if (suffixIdentity == 3) {
+			
+			//add the suffix and nothing else
+			suffixWord = word + suffix; 
 		}
-		else if (suffixIdentity == 2) //if the word ends in a single vowel
+		
+		//if the word ends in a single vowel
+		else if (suffixIdentity == 2) 
 		{
-			if (firstSuffixLetter == true) //if the first letter of the suffix is a vowel
+			//if the first letter of the suffix is a vowel
+			if (firstSuffixLetter == true) 
 			{
-				suffix = suffix.substring(1, suffix.length()); //the suffix now is the original suffix without the first letter
-				suffixWord = word + suffix; //add the suffix to the word
+				//the suffix now is the original suffix without the first letter
+				suffix = suffix.substring(1, suffix.length()); 
+				
+				//add the suffix to the word
+				suffixWord = word + suffix; 
 			}
-			else //if the first letter of the suffix is a consonant
+			
+			//if the first letter of the suffix is a consonant
+			else 
 			{
-				suffix = suffix.substring(0, 1) + suffix; //add the first letter of the suffix to the suffix
-				suffixWord = word + suffix; //add the suffix to the word
+				//add the first letter of the suffix to the suffix
+				suffix = suffix.substring(0, 1) + suffix; 
+				
+				//add the suffix to the word
+				suffixWord = word + suffix; 
 			}
 		}
-		else if (suffixIdentity == 1) //if the word ends in two consonants/vowels
+		
+		//if the word ends in two consonants/vowels
+		else if (suffixIdentity == 1) 
 		{
-			if (firstSuffixLetter == true) //if the first suffix letter is a vowel
+			//if the first suffix letter is a vowel
+			if (firstSuffixLetter == true) 
 			{
-				suffix = suffix.substring(0, 1) + suffix; //add the first letter of the suffix to the suffix
-				suffixWord = word + suffix; //add the suffix to the word
+				//add the first letter of the suffix to the suffix
+				suffix = suffix.substring(0, 1) + suffix; 
+				
+				//add the suffix to the word
+				suffixWord = word + suffix; 
 			}
+			
+			//if the first suffix letter is a consonant
 			else
 			{
 				//the suffix word before the leftmost letter in the vowel/consonant pattern
 				String beginOfSuffixWord = word.substring(0, word.length() - vowelCount - 1); 
+				
 				//the suffix word after the leftmost letter in the vowel/consonant pattern
 				String endOfSuffixWord = word.substring(word.length() - vowelCount, word.length());
 				
@@ -164,45 +197,59 @@ public class VowelsRus {
 			}
 		}
 		
-		System.out.println("Suffix word is " + suffixWord);
-		System.out.println();
+		System.out.println("Suffix word is " + suffixWord); //print the suffix word
+		System.out.println(); //print an extra line
 	}
 	
-	private static void findPattern() {
+	private static void findPattern() { //finds the vowel/consonant pattern necessary for dropping the leftmost letter of a pattern
+		
+		//the count from which the program will search for a pattern in the word
 		int count = 1;
+		
+		//checks if the first letter of the suffix is a vowel
 		boolean vowelIdentity = word.substring(word.length() - 1, word.length()).equals("A") ||
 		                        word.substring(word.length() - 1, word.length()).equals("C") ||
 		                        word.substring(word.length() - 1, word.length()).equals("S") ||
 		                        word.substring(word.length() - 1, word.length()).equals("L");
 		
+		//checks, from right to left, whether each letter is a vowel, returning true if it is
 		boolean letterCheck = (word.substring(word.length() - count, word.length() - count + 1).equals("A") ||
 							   word.substring(word.length() - count, word.length() - count + 1).equals("C") ||
 							   word.substring(word.length() - count, word.length() - count + 1).equals("S") ||
 							   word.substring(word.length() - count, word.length() - count + 1).equals("L"));
 		
+		//checks, from right to left, whether each letter is a consonant, returning true if it is
 		boolean consonantCheck = !(word.substring(word.length() - count, word.length() - count + 1).equals("A") ||
 				   				   word.substring(word.length() - count, word.length() - count + 1).equals("C") ||
 				   				   word.substring(word.length() - count, word.length() - count + 1).equals("S") ||
 				   				   word.substring(word.length() - count, word.length() - count + 1).equals("L"));
-				
+		
+		//if the first letter of the suffix is a vowel
 		if (vowelIdentity == true)
 		{
+			//executes while the letter is a vowel and the count isn't longer than word length (so as to not return out of bounds error)
 			while (letterCheck == true && count <= word.length())
 			{
+				//add one to the count
 				count++;
-				//System.out.println(count);
+				
+				//check if the next letter to the left is still a vowel
 				letterCheck = (word.substring(word.length() - count, word.length() - count + 1).equals("A") ||
 						       word.substring(word.length() - count, word.length() - count + 1).equals("C") ||
 						       word.substring(word.length() - count, word.length() - count + 1).equals("S") ||
 						       word.substring(word.length() - count, word.length() - count + 1).equals("L"));
 			}
 		}
+		//executes if the first letter of the suffix is a consonant
 		else
 		{
+			//executes while the letter is a consonant and the count isn't longer than the word length (no out of bounds errors)
 			while (consonantCheck == true && count <= word.length())
 			{
+				//add one to the count
 				count++;
-				//System.out.println(count);
+				
+				//check if the next letter to the left is a consonant
 				consonantCheck = !(word.substring(word.length() - count, word.length() - count + 1).equals("A") ||
 		   				           word.substring(word.length() - count, word.length() - count + 1).equals("C") ||
 		   				           word.substring(word.length() - count, word.length() - count + 1).equals("S") ||
@@ -210,18 +257,9 @@ public class VowelsRus {
 			}
 		}
 		
+		//sets the vowel or consonant pattern cutoff to 2 minus the count
 		vowelCount = count - 2;
-		//System.out.println(vowelCount);
-		//System.out.println(word.substring(word.length() - vowelCount, word.length()));
+		
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
