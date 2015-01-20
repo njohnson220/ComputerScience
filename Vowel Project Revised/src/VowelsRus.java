@@ -12,6 +12,10 @@
  * 
  * UPDATE 12/14/14
  * Everything is cleaned up, comments have been added for better code readability
+ * 
+ * UPDATE 1/20/14
+ * Woah. Everything is so...fluid now. All the global variables except for input ones have been removed and replaced 
+ * with local variables. Methods are complete with parameter passing.
  */
 
 import java.util.*;
@@ -24,26 +28,19 @@ public class VowelsRus {
 	private static InputStreamReader inReader;
 	private static  BufferedReader reader;
 
-	//program variables to hold data
-	private static String wordFinal, suffixFinal; //variables to store the original word and the suffix
-
-
-	
 	public static void main(String...args) throws IOException {
 		initFile(); //initialize the file
 		executeEverything(countLines()); //analyzes and prints data for as many lines as there are in the document
-		
 	}
 	
 	public static void executeEverything(int lineCount) throws IOException //executes all methods for data analyzation in the program
 	{
 		
 		for (int i = 0; i < lineCount; i++) { //this loop executes as many times as there are lines in the document
-			
-			//getData(); //get data
-			pluralFormer(setWord(getWord()), setSuffix(getSuffix())); //form the plural of the input word
-			findPattern(wordFinal, suffixFinal); //find the leftmost vowel/consonant pattern letter in the input word
-			addSuffix(wordFinal, suffixFinal, pluralFormer(wordFinal, suffixFinal), findPattern(wordFinal, suffixFinal)); //add the suffix to the input word
+			String str = getLine();
+			findPattern(str); //find the leftmost vowel/consonant pattern letter in the input word
+			addSuffix(str,  pluralFormer(str), findPattern(str)); //add the suffix to the input word, also ends up forming the plural
+																  //because of the way my original code worked.
 			}
 	}
 	
@@ -68,7 +65,7 @@ public class VowelsRus {
 		return lineCount;
 	}
 	
-	public static String getWord() throws IOException //tokenize the data lines in the file
+	public static String getLine() throws IOException //tokenize the data lines in the file
 	  {
 		Scanner docReader = new Scanner(reader.readLine()); //I use a scanner for reading the tokens
 		String word = "";
@@ -81,38 +78,15 @@ public class VowelsRus {
 	    System.out.println("Line read is " + word + " " + suffix); //print the unmodified, tokenized data line
 	    docReader.close();
 	    
-	    return word;
+	    return word + " " + suffix; //returns the word and suffix in a single string to be detokenized later
 	  }
 	
-	public static String getSuffix() throws IOException //tokenize the data lines in the file
-	  {
-		Scanner docReader = new Scanner(reader.readLine()); //I use a scanner for reading the tokens
-		String word = "";
-		String suffix = "";
-	    
-	    // placing the first word and suffix in the dataline into string variables    
-	    word = docReader.next();
-	    suffix = docReader.next();
-	    
-	    System.out.println("Line read is " + word + " " + suffix); //print the unmodified, tokenized data line
-	    docReader.close();
-	    
-	    return suffix;
-	  }
-	
-	public static String setWord(String word) {
-		wordFinal = word;
+	public static int pluralFormer(String wordAndSuffix) throws IOException { //this method makes the plurals
+		StringTokenizer st = new StringTokenizer(wordAndSuffix);
+		String word = st.nextToken();
+		String suffix = st.nextToken();
+		//System.out.println(word + " " + suffix);
 		
-		return wordFinal;
-	}
-	
-	public static String setSuffix(String suffix) {
-		suffixFinal = suffix;
-		
-		return suffixFinal;
-	}
-	
-	public static int pluralFormer(String word, String suffix) throws IOException { //this method makes the plurals
 		String pluralWord = "";
 		int suffixIdentity;
 		
@@ -160,7 +134,7 @@ public class VowelsRus {
 		return suffixIdentity;
 	}
 	
-	public static void addSuffix(String word, String suffix, int suffixIdentity, int vowelCount) { //adds suffixes to the words
+	public static void addSuffix(String wordAndSuffix, int suffixIdentity, int vowelCount) { //adds suffixes to the words
 		
 		/* I created different identities for different types of words based on their endings, called suffixIdentity
 		 * Since pluralFormer already analyzes the word, it would be repetitive and inefficient to do it again within this
@@ -172,6 +146,11 @@ public class VowelsRus {
 		 */
 		
 		//the word with the suffix added
+		
+		StringTokenizer st = new StringTokenizer(wordAndSuffix);
+		String word = st.nextToken();
+		String suffix = st.nextToken();
+		
 		String suffixWord = "";
 		
 		//returns true if the first letter of the suffix is a vowel
@@ -240,7 +219,10 @@ public class VowelsRus {
 		System.out.println(); //print an extra line
 	}
 	
-	private static int findPattern(String word, String suffix) { //finds the vowel/consonant pattern necessary for dropping the leftmost letter of a pattern
+	private static int findPattern(String wordAndSuffix) { //finds the vowel/consonant pattern necessary for dropping the leftmost letter of a pattern
+		StringTokenizer st = new StringTokenizer(wordAndSuffix);
+		String word = st.nextToken();
+		//String suffix = st.nextToken();
 		
 		//the count from which the program will search for a pattern in the word
 		int count = 1;
