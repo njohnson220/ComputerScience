@@ -16,6 +16,10 @@
  * UPDATE 1/20/14
  * Woah. Everything is so...fluid now. All the global variables except for input ones have been removed and replaced 
  * with local variables. Methods are complete with parameter passing.
+ * 
+ * UPDATE 1/26/14
+ * Fixed a issue found by Nils Carlson where a "while" loop within findPattern() was executing one too many times
+ * during execution, throwing an outOfBounds error.
  */
 
 import java.util.*;
@@ -250,7 +254,7 @@ public class VowelsRus {
 		if (vowelIdentity == true)
 		{
 			//executes while the letter is a vowel and the count isn't longer than word length (so as to not return out of bounds error)
-			while (letterCheck == true && count <= word.length())
+			while (letterCheck == true && count < word.length())
 			{
 				//add one to the count
 				count++;
@@ -266,7 +270,7 @@ public class VowelsRus {
 		else
 		{
 			//executes while the letter is a consonant and the count isn't longer than the word length (no out of bounds errors)
-			while (consonantCheck == true && count <= word.length())
+			while (consonantCheck == true && count < word.length())
 			{
 				//add one to the count
 				count++;
