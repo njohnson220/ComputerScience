@@ -90,10 +90,13 @@ public class Deck {
 	 */
 	public Card deal() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		
-		Card topCard = cards.get(0);
-		cards.remove(0);
-		return topCard;
+		if (size >= 1) {
+			size = size - 1;
+			Card dealtCard = cards.get(size);
+			return dealtCard;
+		} else {
+			return null;
+		}
 	}
 
 	/**
