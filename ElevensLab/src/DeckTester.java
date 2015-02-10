@@ -16,9 +16,9 @@ public class DeckTester {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
 		
 		//information for the first deck
-		String[] ranks1 = {"A", "B", "C"};
-		String[] suits1 = {"Giraffes", "Lions"};
-		int[] values1 = {2, 1, 6};
+		String[] ranks1 = {"ace", "king", "queen", "jack", "10", "9", "8", "7", "6", "5", "4", "3", "2",};
+		String[] suits1 = {"spades", "hearts", "diamonds", "clubs"};
+		int[] values1 = {11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 		
 		//information for the second deck
 		String[] ranks2 = {"D", "E", "F", "G"};
