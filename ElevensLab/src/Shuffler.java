@@ -14,7 +14,7 @@ public class Shuffler {
 	/**
 	 * The number of values to shuffle.
 	 */
-	private static final int VALUE_COUNT = 8;
+	private static final int VALUE_COUNT = 52;
 
 	/**
 	 * Tests shuffling methods.
@@ -108,7 +108,7 @@ public class Shuffler {
 		for (int i = 0; i < length; i++) {
 			while (true) {
 				random = generator.nextInt(length);
-				if (random != 0) {
+				if (values[random] != 0 || (i == length - 1)) {
 					break;	
 				}
 			}
