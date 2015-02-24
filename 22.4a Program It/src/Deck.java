@@ -62,17 +62,26 @@ public class Deck {
 	 * Randomly permute the given collection of cards
 	 * and reset the size to represent the entire deck.
 	 */
-	public void shuffle(f) {
+	public void shuffle() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
 		
 		Random generator = new Random();
-		int n = values.length;
-		for (int i = 0; i < values.length; i++) {
-		    int randomNumber = i + generator.nextInt(values.length - i);
-		    int randomElement = values[randomNumber];
-		    values[randomNumber] = values[i];
-		    values[i] = randomElement;
+		int n = cards.size();
+		for (int i = 0; i < cards.size(); i++) {
+			
+		    int randomNumber = i + generator.nextInt(cards.size() - i);
+			Card randomElement = cards.get(randomNumber);
+			Card iterationElement = cards.get(i);
+			
+			cards.set(randomNumber, iterationElement);
+			cards.set(i, randomElement);
 		}
+		
+		if (size == 0) {
+			size = cards.size();
+		}
+
+		
 	}
 
 	/**
@@ -81,11 +90,14 @@ public class Deck {
 	 *         previously dealt.
 	 */
 	public Card deal() {
+		
 		if (isEmpty()) {
 			return null;
 		}
 		size--;
+		int mySize = size;
 		Card c = cards.get(size);
+		
 		return c;
 	}
 
