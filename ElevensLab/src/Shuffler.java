@@ -96,28 +96,13 @@ public class Shuffler {
 	 */
 	public static void selectionShuffle(int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
-		
-		
-		int length = values.length;
-		int[] shuffled = new int[values.length];
 		Random generator = new Random();
-		int random = generator.nextInt(length);
-		
-		
-
-		for (int i = 0; i < length; i++) {
-			while (true) {
-				random = generator.nextInt(length);
-				if (values[random] != 0 || (i == length - 1)) {
-					break;	
-				}
-			}
-			shuffled[i] = values[random];
-			values[random] = 0;
-		}
-		
+		int n = values.length;
 		for (int i = 0; i < values.length; i++) {
-			values[i] = shuffled[i];
+		    int randomNumber = i + generator.nextInt(values.length - i);
+		    int randomElement = values[randomNumber];
+		    values[randomNumber] = values[i];
+		    values[i] = randomElement;
 		}
 
 	}
