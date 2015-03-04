@@ -25,7 +25,7 @@ public class Deck {
 	/**
 	 * Creates a new <code>Deck</code> instance.<BR>
 	 * It pairs each element of ranks with each element of suits,
-	 * and produces one of the corresponding card.
+	 * and produces one of the corresponding card.asdf
 	 * @param ranks is an array containing all of the card ranks.
 	 * @param suits is an array containing all of the card suits.
 	 * @param values is an array containing all of the card point values.
