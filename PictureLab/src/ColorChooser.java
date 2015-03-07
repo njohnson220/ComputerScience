@@ -11,7 +11,7 @@ import java.awt.Color;
  */
 public class ColorChooser 
 {
-  
+
   /**
    * Method to let the user pick a color and return
    * the color object. 
