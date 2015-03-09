@@ -28,9 +28,10 @@ public class Summation {
 //STATIC METHOD FOR SUM
 
     private static int sum(int a, int b){
-
-// TYPE HERE THE CODE FOR THE RECURSIVE SUM.
-
+        result = a + sum(a + 1, b);
+        if (a == b) {
+            return result;
+        }
     }
 
     public String toString(){
