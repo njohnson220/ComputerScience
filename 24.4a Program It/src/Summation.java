@@ -28,9 +28,14 @@ public class Summation {
 //STATIC METHOD FOR SUM
 
     private static int sum(int a, int b){
-        result = a + sum(a + 1, b);
+        int total = 0;
         if (a == b) {
-            return result;
+            return b;
+        }
+        else {
+            //System.out.println(a + " " + b);
+            total = a + (sum(a + 1, b));
+            return total;
         }
     }
 
