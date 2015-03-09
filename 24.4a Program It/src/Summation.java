@@ -7,7 +7,7 @@
  */
 
 public class Summation {
-    private static int low,high,result; //VARIABLES USED IN THIS CLASS.
+    private static int low,high,result, lowValue, highValue; //VARIABLES USED IN THIS CLASS.
 
 //CONSTRUCTOR METHOD 1
 
@@ -30,11 +30,17 @@ public class Summation {
     private static int sum(int a, int b){
         int total = 0;
         if (a == b) {
+            System.out.println("Lower value is " + a);
+            System.out.println("Higher value is " + b);
+            System.out.println();
             return b;
         }
         else {
             //System.out.println(a + " " + b);
             total = a + (sum(a + 1, b));
+            System.out.println("Lower value is " + a);
+            System.out.println("Higher value is " + b);
+            System.out.println();
             return total;
         }
     }

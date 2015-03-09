@@ -14,8 +14,12 @@ public class Student {
    public Student(){
       this("");
    }
-    
-   // Name is nm and 3 scores are 0
+
+    public ArrayList<Integer> getTests() {
+        return tests;
+    }
+
+    // Name is nm and 3 scores are 0
    public Student(String nm){
       this(nm, 3);
    }
@@ -34,9 +38,9 @@ public class Student {
    public Student(String nm, ArrayList<Integer> t){
 	   name = nm;
 	   tests = new ArrayList<Integer>(t.size());
-	   for (int i = 0; i < t.size(); i++) {
-		   tests.add(t.get(i));
-	   }
+       for (Integer aT : t) {
+           tests.add(aT);
+       }
    }
     
    // Builds a copy of s

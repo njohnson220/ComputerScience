@@ -13,7 +13,6 @@ public class TestScoresModel{
       // Initialize the data
       indexSelectedStudent = -1;
       studentCount = t.size();
-      
       students = t;
    }
 
@@ -117,8 +116,8 @@ public class TestScoresModel{
       if (studentCount == 0)
          return null;
       else{
-         Student s = students.get(0);;
-         for (int i = 1; i < studentCount; i++)
+         Student s = students.get(0);
+          for (int i = 1; i < studentCount; i++)
             if (s.getHighScore() < students.get(i).getHighScore())
                s = students.get(i);
          return s;
