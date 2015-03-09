@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;

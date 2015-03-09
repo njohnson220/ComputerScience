@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 

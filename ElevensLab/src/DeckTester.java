@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 /*Nathan Johnson
  * 2/9/15
  * Deck tester class intended to test the Deck class and its included methods.

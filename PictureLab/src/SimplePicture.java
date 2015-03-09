@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;

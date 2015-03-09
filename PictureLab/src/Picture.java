@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.*;

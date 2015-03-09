@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import java.awt.Color;

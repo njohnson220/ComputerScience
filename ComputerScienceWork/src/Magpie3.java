@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 /**
  * A program to carry on conversations with a human user.
  * This version: 

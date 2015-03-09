@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import java.util.Properties;

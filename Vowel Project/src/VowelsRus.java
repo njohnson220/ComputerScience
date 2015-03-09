@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 /*Nathan Johnson
  * 12/4/14
  * Vowels-R-Us project

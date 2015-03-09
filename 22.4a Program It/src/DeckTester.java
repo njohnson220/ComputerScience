@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 /*Nathan Johnson
  * 2/24/15
  * This deck tester utilizes the Deck class which in itself utilizes the Card class.
@@ -8,6 +12,7 @@
  * This is a class that tests the Deck class.
  */
 public class DeckTester {
+
 
 	/**
 	 * The main method in this class checks the Deck operations for consistency.

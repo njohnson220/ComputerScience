@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 public class IntArrayWorker
 {
   /** two dimensional matrix */

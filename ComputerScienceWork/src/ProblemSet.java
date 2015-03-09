@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. Nathan Johnson
+ */
+
 //Nathan Johnson
 //10/21/14
 //7.5ProblemSet
