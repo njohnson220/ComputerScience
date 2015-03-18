@@ -54,6 +54,14 @@ public class ElevensBoard extends Board {
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+        boolean pairSum11 = containsPairSum11(selectedCards);
+        boolean containsJQK = containsJQK(selectedCards);
+
+        if (pairSum11 || containsJQK) {
+            return true;
+        } else {
+            return false;
+        }
 	}
 
 	/**
@@ -67,6 +75,28 @@ public class ElevensBoard extends Board {
 	@Override
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+        for (int i = 0; i <= 8; i++) {
+            Card testAddition = cardAt(i);
+            for (int k = 0; k <= 8; k++) {
+                Card testAddition2 = cardAt(k);
+                if ((testAddition.pointValue() + testAddition2.pointValue()) == 11) {
+                    return true;
+                }
+            }
+        }
+        for (int i = 0; i <= 8; i++) {
+            Card testAddition = cardAt(i);
+            for (int k = 0; k <= 8; k++) {
+                Card testAddition2 = cardAt(k);
+                for (int j = 0; j <= 8; j++) {
+                    Card testAddition3 = cardAt(j);
+                    if ((testAddition.pointValue() + testAddition2.pointValue() + testAddition3.pointValue()) == 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
 	}
 
 	/**
@@ -79,6 +109,14 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+        Card card1 = cardAt(selectedCards.get(0));
+        Card card2 = cardAt(selectedCards.get(1));
+
+        if ((card1.pointValue() + card2.pointValue()) == 11) {
+            return true;
+        } else {
+            return false;
+        }
 	}
 
 	/**
@@ -91,5 +129,26 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+        int sum = 0;
+        for (int i = 0; i < selectedCards.size(); i++) {
+
+            sum = sum + cardAt(selectedCards.get(i)).pointValue();
+            System.out.println(sum);
+        }
+
+        if (selectedCards.size() > 3 && sum == 0) {
+            return false;
+        }
+
+        if (selectedCards.size() < 3 && sum == 0) {
+            return false;
+        }
+
+        if (sum == 0) {
+            return true;
+        } else {
+            return false;
+        }
+
 	}
 }
