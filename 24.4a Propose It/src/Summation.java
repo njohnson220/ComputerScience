@@ -35,6 +35,7 @@ public class Summation {
             System.out.println();
             return b;
         }
+
         else {
             //System.out.println(a + " " + b);
             total = a + (sum(a + 1, b));
