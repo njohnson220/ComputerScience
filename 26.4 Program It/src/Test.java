@@ -23,11 +23,12 @@ public class Test {
 
     private static List<Student> classroom = new ArrayList<Student>(); // ArrayList to store the classroom.
 
-    public static void main(String args[]) throws IOException {
+	public static void main(String args[]) throws IOException {
         initFile();
         getData();
         System.out.print(classroom + "\n\n\n");  //output of the complete class.
-        selectionSort();
+        //selectionSort();
+		Collections.sort(classroom);
         System.out.print(classroom); //output after sorting.
         inFile.close();
 

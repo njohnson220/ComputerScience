@@ -1,7 +1,7 @@
 import java.util.*;
 
 
-public class Student {
+public class Student implements Comparable<Student> {
 
     private String id;
     private String[] quizresult = new String[10];
@@ -101,6 +101,17 @@ public class Student {
 
     }
 
+	@Override
+	public int compareTo(Student that) {
+		if (this.getScore() == that.getScore()) {
+			return 0;
+		} else if (this.getScore() < that.getScore()) {
+			return -1;
+		} else if (this.getScore() > that.getScore()) {
+			return 1;
+		}
+		return 1;
+	}
 }
 
 	
