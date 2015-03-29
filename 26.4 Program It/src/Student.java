@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Arrays;
 
 
 public class Student implements Comparable<Student> {
@@ -48,6 +48,10 @@ public class Student implements Comparable<Student> {
 
     public String getLetterGrade() { //returns the letter grade of said student
         return letterGrade;
+    }
+
+    public String getID() {
+        return id;
     }
 
 
