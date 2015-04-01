@@ -39,7 +39,7 @@ public class Test {
             MergeSorter.sort(classroom);
             System.out.print(classroom); //output after sorting.
         }
-        if (userSelection == 1) {
+        else if (userSelection == 1) {
             QuickSorter.sort(classroom);
             System.out.print(classroom); //output after sorting.
         }
