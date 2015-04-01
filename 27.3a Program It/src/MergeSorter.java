@@ -5,8 +5,9 @@ import java.util.*;
  */
 public class MergeSorter {
 
-    public static List<Student> mergeSort(List<Student> a) {
-        List<Student> copyBuffer = new ArrayList<Student>(a.size());
+    public static List<Student> sort(List<Student> a) {
+        List<Student> copyBuffer = new ArrayList<>();
+        copyBuffer.addAll(a);
         mergeSortHelper(a, copyBuffer, 0, a.size() - 1);
         return copyBuffer;
     }
@@ -24,19 +25,30 @@ public class MergeSorter {
         int i1 = low;
         int i2 = middle + 1;
         for (int i = low; i <= high; i++) {
-            if (i1 > middle)
+            if (i1 > middle) {
+                //System.out.println(copyBuffer.get(i));
                 copyBuffer.set(i, a.get(i2++));
-            else if (i2 > high)
+                //System.out.println(copyBuffer.get(i));
+            }
+            else if (i2 > high) {
+                //System.out.println(copyBuffer.get(i));
                 copyBuffer.set(i, a.get(i1++));
-            else if (a.get(i1).getScore() < a.get(i2).getScore())
+                //System.out.println(copyBuffer.get(i).toString());
+            }
+            else if (a.get(i1).getScore() < a.get(i2).getScore()) {
+                //System.out.println(copyBuffer.get(i));
                 copyBuffer.set(i, a.get(i1++));
-            else
+                //System.out.println(copyBuffer.get(i).toString());
+            }
+            else {
+                //System.out.println(copyBuffer.get(i));
                 copyBuffer.set(i, a.get(i2++));
+                //System.out.println(copyBuffer.get(i).toString());
+            }
         }
 
-        for (int i = low; i <- high; i++) {
+        for (int i = low; i <= high; i++) {
             a.set(i, copyBuffer.get(i));
         }
-
     }
 }

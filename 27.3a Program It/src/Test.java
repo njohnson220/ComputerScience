@@ -6,15 +6,13 @@ Specifically, I used the selection sort model from the textbook by adapting it t
  */
 
 import com.sun.scenario.effect.Merge;
+import com.sun.xml.internal.bind.v2.model.annotation.Quick;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 
 public class Test {
@@ -27,15 +25,27 @@ public class Test {
 
     private static List<Student> classroom = new ArrayList<Student>(); // ArrayList to store the classroom.
 
-	public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws IOException {
         initFile();
         getData();
-        System.out.print(classroom + "\n\n\n");  //output of the complete class.
-        //selectionSort(classroom);
-		//Collections.sort(classroom);
-        //quickSort(classroom, 0, classroom.size() - 1);
-        mergeSort(classroom);
-        System.out.print(classroom); //output after sorting.
+        Scanner reader = new Scanner(System.in);
+
+        System.out.print(classroom + "\n\n\n");  //output of the complete unsorted class.
+        System.out.println("Enter what search method you would like to use:");
+        System.out.println("0 for merge sort, or 1 for quick sort.\n\n");
+        int userSelection = reader.nextInt();
+
+        if (userSelection == 0) {
+            MergeSorter.sort(classroom);
+            System.out.print(classroom); //output after sorting.
+        }
+        if (userSelection == 1) {
+            QuickSorter.sort(classroom);
+            System.out.print(classroom); //output after sorting.
+        }
+        else
+            System.out.println("Please respond with 0 or 1");
+
         inFile.close();
 
     }
@@ -64,70 +74,6 @@ public class Test {
             }
 
         }
-    }
-
-    public static void quickSort(List<Student> unsortedList, int left, int right) {
-        if (left >= right) {
-            return;
-        }
-
-        int i = left;
-        int j = right;
-        int pivotValue = unsortedList.get((left + right) / 2).getScore();
-        while (i < j) {
-            while (unsortedList.get(i).getScore() < pivotValue) {
-                i++;
-            }
-            while (pivotValue < unsortedList.get(j).getScore()) {
-                j--;
-            }
-            if (i <= j) {
-                Student temp = unsortedList.get(i);
-                unsortedList.set(i, unsortedList.get(j));
-                unsortedList.set(j, temp);
-                i++;
-                j--;
-            }
-        }
-        quickSort(unsortedList, left, j);
-        quickSort(unsortedList, i, right);
-
-    }
-
-    public static List<Student> mergeSort(List<Student> a) {
-        //List<Student> copyBuffer = new ArrayList<Student>(127);
-        List<Student> copyBuffer = a;
-        mergeSortHelper(a, copyBuffer, 0, a.size() - 1);
-        return copyBuffer;
-    }
-
-    public static void mergeSortHelper(List<Student> a, List<Student> copyBuffer, int low, int high) {
-        if (low < high) {
-            int middle = (low + high) / 2;
-            mergeSortHelper(a, copyBuffer, low, middle);
-            mergeSortHelper(a, copyBuffer, middle + 1, high);
-            merge(a, copyBuffer, low, middle, high);
-        }
-    }
-
-    public static void merge(List<Student> a, List<Student> copyBuffer, int low, int middle, int high) {
-        int i1 = low;
-        int i2 = middle + 1;
-        for (int i = low; i <= high; i++) {
-            if (i1 > middle)
-                copyBuffer.set(i, a.get(i2++));
-            else if (i2 > high)
-                copyBuffer.set(i, a.get(i1++));
-            else if (a.get(i1).getScore() < a.get(i2).getScore())
-                copyBuffer.set(i, a.get(i1++));
-            else
-                copyBuffer.set(i, a.get(i2++));
-        }
-
-        for (int i = low; i <- high; i++) {
-            a.set(i, copyBuffer.get(i));
-        }
-
     }
 
     // preparing the file for input
