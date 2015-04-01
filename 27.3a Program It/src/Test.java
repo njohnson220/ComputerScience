@@ -1,8 +1,8 @@
 /*
 Nathan Johnson
-3/25/15
+3/31/15
 Added sorting mechanism to the Test class, sorting students in order from lowest to highest grade.
-Specifically, I used the selection sort model from the textbook by adapting it to this program's needs.
+Specifically, I used the selection and merge sort models from the textbook by adapting it to this program's needs.
  */
 
 import com.sun.scenario.effect.Merge;
